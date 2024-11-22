@@ -1,10 +1,15 @@
+# terragrunt/client1/pro/terragrunt.hcl
+
 include {
   path = find_in_parent_folders()
 }
 
+locals {
+  parent_config = read_terragrunt_config(find_in_parent_folders("client1.hcl"))
+}
+
 inputs = {
-  bucket_name            = "${include.locals.bucket_prefix}-pro-bucket"
-  table_name             = "${include.locals.table_prefix}-pro-table"
-  dynamodb_read_capacity = 2
+  bucket_name             = "${local.parent_config.locals.client_name}-pro-bucket"
+  table_name              = "${local.parent_config.locals.client_name}-pro-table"
   dynamodb_write_capacity = 2
 }

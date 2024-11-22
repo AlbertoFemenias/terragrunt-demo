@@ -1,5 +1,9 @@
-variable "bucket_name" {}
-variable "table_name" {}
+variable "bucket_name" {
+  default = "default_bucket_name"
+}
+variable "table_name" {
+  default = "default_table_name"
+}
 variable "dynamodb_read_capacity" {
   default = 1
 }
