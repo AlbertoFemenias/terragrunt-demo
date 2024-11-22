@@ -43,13 +43,13 @@ Terragrunt is a wrapper that provides extra tools for working with Terraform con
     ├── modules/
     │   └── simple_module/          # Terraform module
     ├── client1/
-    │   ├── terragrunt.hcl          # Client-level configuration
+    │   ├── client1.hcl          # Client-level configuration
     │   ├── dev/
     │   │   └── terragrunt.hcl      # Environment-level configuration (dev)
     │   └── pro/
     │       └── terragrunt.hcl      # Environment-level configuration (pro)
     └── client2/
-        ├── terragrunt.hcl          # Client-level configuration
+        ├── client2.hcl          # Client-level configuration
         ├── dev/
         │   └── terragrunt.hcl      # Environment-level configuration (dev)
         └── pro/
