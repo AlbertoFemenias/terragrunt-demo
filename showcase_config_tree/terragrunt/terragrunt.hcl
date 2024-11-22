@@ -16,8 +16,8 @@ remote_state {
 
 inputs = {
   # Default capacities for DynamoDB
-  dynamodb_read_capacity  = 1
-  dynamodb_write_capacity = 1
+  dynamodb_read_capacity  = 2
+  dynamodb_write_capacity = 2
 }
 
 locals {
@@ -35,11 +35,12 @@ EOF
 }
 
 terraform {
+  # notice that leaf terragrunt.hcl are inheriting the source module
   source = "${get_parent_terragrunt_dir()}/modules/simple_module"
 
   before_hook "before_hook" {
     commands     = ["apply", "plan"]
-    execute      = ["echo", "👋😊 This echo comes from terragrunt's before_hook, edit me to run real commands before terraform apply/plan"]
+    execute      = ["echo", "👋😊 This echo comes from Terragrunt's before_hook, edit me to run real commands before terraform apply/plan"]
   }
 
   after_hook "after_hook" {

@@ -1,3 +1,4 @@
 .terragrunt*
 .terraform*
 .gitconfig
+terraform.tfstate*

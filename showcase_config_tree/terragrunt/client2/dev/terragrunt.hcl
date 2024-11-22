@@ -9,6 +9,6 @@ locals {
 }
 
 inputs = {
-  bucket_name             = "${local.parent_config.locals.client_name}-dev-bucket"
-  table_name              = "${local.parent_config.locals.client_name}-dev-table"
+  bucket_name = "${local.parent_config.locals.client_name}-dev-bucket"
+  table_name  = "${local.parent_config.locals.client_name}-dev-table"
 }

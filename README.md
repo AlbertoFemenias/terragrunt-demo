@@ -62,7 +62,7 @@ Terragrunt is a wrapper that provides extra tools for working with Terraform con
 
 4. Now open `terragrunt/client1/dev/terragrunt.hcl`: there is no backend bucket defined in there.
 
-5. Go look and look for it inside `terragrunt/client1/dev/terragrunt.hcl`. Then check that the state bucket `tgshowcase-terraform-state-bucket` does not exist in your account (https://eu-west-1.console.aws.amazon.com/s3/home?region=eu-west-1).
+5. Go look and look for it inside `terragrunt/terragrunt.hcl`. Then check that the state bucket `tgshowcase-terraform-state-bucket` does not exist in your account (https://eu-west-1.console.aws.amazon.com/s3/home?region=eu-west-1).
 
 6. Let's try to run `terragrunt plan` at `terragrunt/client1/dev`. Allow terragrunt to create the s3 bucket.
 
@@ -284,11 +284,12 @@ terraform {
 ```hcl
 terraform {
 # Force Terraform to keep trying to acquire a lock for up to 20 minutes if someone else already has the lock
-extra_arguments "retry_lock" {
-    commands = [
-    "plan",
-    "apply"
-    ]
-    arguments = ["-lock-timeout=20m"]
+    extra_arguments "retry_lock" {
+        commands = [
+        "plan",
+        "apply"
+        ]
+        arguments = ["-lock-timeout=20m"]
+    }
 }
 ```
