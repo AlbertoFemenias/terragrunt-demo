@@ -7,7 +7,7 @@ remote_state {
     if_exists = "overwrite"
   }
   config = {
-    bucket         = "tgshowcase-terraform-state-bucket"
+    bucket         = "tgshowcase-terraform-state-bucket-${get_aws_account_id()}"
     region         = "eu-west-1"
     key            = "terragrunt/${path_relative_to_include()}/terraform.tfstate"
     dynamodb_table = "terragrunt-tf-lock"
