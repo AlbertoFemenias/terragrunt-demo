@@ -1,18 +1,30 @@
 # Terragrunt Demo
 
-This repository was created to showcase some of the powers that [Terragrunt](https://terragrunt.gruntwork.io/) adds to plain Terraform.
+ **Table of contents**
+ - [Hands-on: showcase_config_tree](#understanding-the-power-of-terragrunt-showcase_config_tree)
+ - [Terragrunt features overview](#some-examples-of-how-terragrunt-extends-terraform)
 
-Terragrunt is a wrapper that provides extra tools for working with Terraform configurations, helping manage and maintain Terraform code more effectively. You can keep using the same te
+[This repository](https://github.com/AlbertoFemenias/terragrunt-demo) was created to showcase some of the powers that [Terragrunt](https://terragrunt.gruntwork.io/) adds to plain Terraform. It has a [demo project](#understanding-the-power-of-terragrunt-showcase_config_tree) that will help you understand how Terragrunt enhances Terraform while keeping the code structured and DRY. I have also added an overview of [some neat Terragrunt features](#some-examples-of-how-terragrunt-extends-terraform) that can help you decide if you want to add this tool to your stack.
 
-## Prerequisites
-- Some experience with terraform
-- [AWS Account that can be managed by terraform](https://banhawy.medium.com/3-ways-to-configure-terraform-to-use-your-aws-account-fb00a08ded5)
+### Prerequisites
+- Some experience with Terraform
+- [AWS Account that can be managed by Terraform](https://banhawy.medium.com/3-ways-to-configure-terraform-to-use-your-aws-account-fb00a08ded5)
 - [Terraform installed](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 - [Terragrunt installed](https://terragrunt.gruntwork.io/docs/getting-started/install/)
 
+Terragrunt is a wrapper that provides extra tools for working with Terraform configurations, helping manage and maintain Terraform code more effectively. You can keep using the same commands as you did with Terraform, just change the binary to Terragrunt's:
+
+```
+terragrunt plan -var 'name=value' -out=FILENAME
+terraform plan -var 'name=value' -out=FILENAME
+```
+
+You are now ready to dive into terragrunt territory!
+
+
 ## Understanding the power of Terragrunt: showcase_config_tree
 
-1.  Navigate to `showcase_config_tree/terraform` and look that we have one `backend.tf` file in each client environment. Take a look at the content of the `.tf` files, configuration is very similar between and environments and clients. Each client environment has to define all values, even if they are shared between environments or common between clients!
+1.  Navigate to `showcase_config_tree/terraform` and notice that we have one `backend.tf` file in each client environment. Take a look at the content of the `.tf` files, the configuration is very similar between and environments and clients. Each client environment has to define all values, even if they are shared between environments or common between clients!
 
     ```
     ├── client1
@@ -56,15 +68,15 @@ Terragrunt is a wrapper that provides extra tools for working with Terraform con
             └── terragrunt.hcl      # Environment-level configuration (pro)
     ```
 
-    There are no `backend.tf` files! If you take a peak at the environment `terragrunt.hcl` you will see that values like the client's name are inherited instead of repeated.
+    There are no `backend.tf` files! If you take a peek at the environment `terragrunt.hcl` you will see that values like the client's name are inherited instead of repeated.
 
 3. Navigate to the `terraform/client1/dev` folder and run a `terraform init`. The bucket and the dynamo table do not exist, you have to create them manually to store the state.
 
 4. Now open `terragrunt/client1/dev/terragrunt.hcl`: there is no backend bucket defined in there.
 
-5. Go look and look for it inside `terragrunt/terragrunt.hcl`. Then check that the state bucket `tgshowcase-terraform-state-bucket` does not exist in your account (https://eu-west-1.console.aws.amazon.com/s3/home?region=eu-west-1).
+5. Look for it inside `terragrunt/terragrunt.hcl`. Then check that the state bucket `tgshowcase-terraform-state-bucket` does not exist in your account (https://eu-west-1.console.aws.amazon.com/s3/home?region=eu-west-1).
 
-6. Let's try to run `terragrunt plan` at `terragrunt/client1/dev`. Allow terragrunt to create the s3 bucket.
+6. Let's try to run `terragrunt plan` at `terragrunt/client1/dev`. Allow Terragrunt to create the s3 bucket.
 
 7. Observe how the [DynamoDB table](https://eu-west-1.console.aws.amazon.com/dynamodbv2/home?region=eu-west-1#table?name=terragrunt-tf-lock) was created together with the bucket.
 
@@ -265,7 +277,7 @@ terraform {
 
 **Benefit:**
 
-- Avoid writing terraform code to handle code and resources that are not IaC.
+- Avoid writing Terraform code to handle code and resources that are not IaC.
 
 ---
 
